@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  jackson:
+    #    返回给浏览器的时间会和后台相差8小时
+    time-zone: GMT+8
+  resources:
+    static-locations: classpath:/static/
+  application:
+    name: product-manager
+    test: test-master
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.100.56.199:3306/insurer?serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: 123456
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 200
+    # 配置redis
+  redis:
+    #数据库索引
+    database: 0
+    host: 47.100.56.199
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+        #连接超时时间
+        timeout: 10000
+
+mybatis:
+  type-aliases-package: com.treeke.model
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.treeke.dao: debug
+    com.treeke.mapper: debug
+

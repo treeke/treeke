@@ -1,0 +1,77 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  jackson:
+    #    返回给浏览器的时间会和后台相差8小时
+    time-zone: GMT+8
+  resources:
+    static-locations: classpath:/static/
+  application:
+    name: product-manager
+    test: test-master
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/insurer?serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: root001
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 200
+    # 配置redis
+  redis:
+    #数据库索引
+    database: 0
+    host: redis
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+        #连接超时时间
+        timeout: 10000
+
+mybatis:
+  type-aliases-package: com.diankexinlian.model
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+chaincode:
+  #智能合约chaincode
+  invokeAddress: http://172.16.5.42/cc_manager/fabric/invoke
+  queryAddress: http://172.16.5.42/cc_manager/fabric/query
+  #chainCodeName: mycc
+  chainCodeName: zp
+  appKey: 4e7f7dcc4bdc449bbd022d19897314c5
+  appSecret: 9c5e0a7aa02e49cbba0cd0be6dad3aa7
+
+logging:
+  level:
+    com.diankexinlian.dao: debug
+    com.diankexinlian.mapper: debug
+
+fastdfs:
+  tracker_servers: tracker0:22122
+  connect_timeout_in_seconds: 2
+  network_timeout_in_seconds: 30
+  charset: UTF-8
+  http_anti_steal_token: no
+  http_secret_key: FastDFS1234567890
+  http_tracker_http_port: 8080
+
+show:
+  path: https://zp.cetcxl.com/mip?id=

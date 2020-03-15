@@ -1,0 +1,54 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  freemarker:
+    check-template-location: false
+  application:
+    name: luna-chaincode-manager
+  datasource:
+    url: jdbc:mysql://mysql:3306/chaincodemanager
+    username: root
+    password: root001
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 配置redis
+  redis:
+    #数据库索引
+    database: 0
+    host: redis
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+    #连接超时时间
+    timeout: 10000
+
+mybatis:
+  type-aliases-package: com.diankexinlian.model
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.diankexinlian.dao: debug
+
+fastdfs:
+  tracker_servers: tracker0:22122,tracker1:22122
+  connect_timeout_in_seconds: 2
+  network_timeout_in_seconds: 30
+  charset: UTF-8
+  http_anti_steal_token: no
+  http_secret_key: FastDFS1234567890
+  http_tracker_http_port: 8080
+
+show:
+  path: https://zp.cetcxl.com/mip?id=
